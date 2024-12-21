@@ -1,0 +1,7 @@
+*~
+.*.swp
+.DS_Store
+*.json
+run.go
+aoc_run
+inputs/*
