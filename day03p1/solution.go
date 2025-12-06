@@ -1,24 +1,9 @@
 package day03p1
 
 import (
-	"fmt"
 	"io"
-	"slices"
-	"strings"
-	"strconv"
-
 	"aoc/utils"
 )
-
-func digitsToDoubleNum(first int, second int) int {
-	numStr := strconv.Itoa(first) + strconv.Itoa(second)
-	println("joltage is" + numStr)
-	num, err := strconv.Atoi(numStr)
-	if err != nil {
-		panic(err)
-	}
-	return num
-}
 
 func Solve(r io.Reader) any {
 	lines := utils.ReadLines(r)
@@ -38,30 +23,19 @@ func Solve(r io.Reader) any {
 			bank = append(bank, int(rune - '0'))
 		}
 
-		// matrix where k=the int value
-		// value=a slice of all indexes where that k appears
-		matrix := make([][]int, 9)
-		for i, val := range bank {
-			matrix[val] = append(matrix[val], i)
-		}
-
-		for i := 0; i < 9; i++ {
-			slices.Sort(matrix[i]) // ascending
-		}
-
-		var top int
-		var nextTop int
-
-		for i := 8; i >= 0; i-- {
-			// actual num we are checking is i+1
-			if len(matrix[i]) > 0 {
-				top = val
-				for _, val := range matrix[i] {
-				}
+		topTen := 0
+		max := 0
+		for _, val := range bank {
+			newMax := topTen*10 + val
+			if newMax > max {
+				max = newMax
+			}
+			if val > topTen {
+				topTen = val
 			}
 		}
 
-		joltage += digitsToDoubleNum(top, nextTop)
+		joltage += max
 	}
 
 
