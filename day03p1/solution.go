@@ -2,6 +2,7 @@ package day03p1
 
 import (
 	"io"
+
 	"aoc/utils"
 )
 
