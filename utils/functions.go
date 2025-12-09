@@ -92,3 +92,25 @@ func ReadChars(reader io.Reader) ([][]rune, error) {
 
 	return result, nil
 }
+
+type Primitive interface {
+	int | rune | byte | bool
+}
+
+
+func NewMatrix[T Primitive](size int, innerSize int) *[][]T {
+	var matrix = make([][]T, size)
+	for i := range matrix {
+		matrix[i] = make([]T, innerSize)
+	}
+	return &matrix
+}
+
+func PrintMatrix[T Primitive](matrix [][]T) {
+	for _, row := range matrix {
+		for _, val := range row {
+			print(val, ",")
+		}
+		println()
+	}
+}
