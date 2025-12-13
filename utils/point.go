@@ -1,10 +1,39 @@
 package utils
 
+import "slices"
+
 // 2-D Point
 type Point struct {
 	X int
 	Y int
 }
+
+func (p Point) xIdx() int {
+	return abs(p.X)
+}
+
+func (p Point) yIdx() int {
+	return abs(p.Y)
+}
+
+// transform a matrix of runes read sequentially,
+// so that the origin (0, 0) is the bottom left of the matrix
+func RunesToChart(r *[][]rune) {
+	slices.Reverse(*r)
+}
+
+// not currently thread safe, todo improve
+func PrintChart(r [][]rune) {
+	slices.Reverse(r)
+	for _, line := range r {
+		for _, char := range line {
+			print(string(char))
+		}
+		println()
+	}
+	slices.Reverse(r)
+}
+
 
 // +Y direction
 var North = Point{0, 1}
