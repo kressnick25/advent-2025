@@ -1,6 +1,9 @@
 package utils
 
-import "slices"
+import (
+	"math"
+	"slices"
+)
 
 // 2-D Point
 type Point struct {
@@ -75,6 +78,18 @@ func (p Point) Left() Point {
 // Return manhattan distance (abs(x)+abs(y))
 func (p Point) Manhattan() int {
 	return abs(p.X) + abs(p.Y)
+}
+
+// return diagonal distance bewteen two points
+func Pythagoras(a Point, b Point) float64 {
+	t := math.Pow(float64(b.X - a.X), 2) + math.Pow(float64(b.Y - a.Y), 2)
+	return math.Sqrt(t)
+}
+
+// return of a square between two corners
+func CornerArea(a Point, b Point) float64 {
+	d := Pythagoras(a, b)
+	return math.Pow(d, 2) / 2
 }
 
 func abs(x int) int {
